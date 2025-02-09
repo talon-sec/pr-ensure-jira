@@ -137,8 +137,14 @@ async function run(
       );
     }
     
-    core.info(`Verifying that ticket ${ticket} exists in JIRA`);
-    await verifyTicketExistsInJIRA(ticket, atlassianDomain, atlassianToken);
+    if (atlassianDomain !== 'jira-dc.paloaltonetworks.com')
+    {
+      core.info(`Verifying that ticket ${ticket} exists in JIRA`);
+      await verifyTicketExistsInJIRA(ticket, atlassianDomain, atlassianToken);
+    }
+    else {
+      core.info('Skipping JIRA verification for JIRA DC');
+    }
 
     core.info(`Verifying that ticket ${ticket} exists in ticket body`);
     const body: string = github.context!.payload!.pull_request!.body ?? '';
