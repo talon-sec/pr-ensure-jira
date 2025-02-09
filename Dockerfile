@@ -1,4 +1,4 @@
-FROM node:lts-slim
+FROM docker-io.art.code.pan.run/node:lts-slim
 
 COPY . .
 
